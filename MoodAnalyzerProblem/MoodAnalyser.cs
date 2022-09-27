@@ -9,9 +9,6 @@ namespace MoodAnalyzerProblem
     public class MoodAnalyser
     {
         public string message;
-        /// <summary>
-        /// Initializes a new instances of the <see cref="= "MoodAnalyser"/>class.
-        /// </summary>
         public MoodAnalyser()
         {
         }
