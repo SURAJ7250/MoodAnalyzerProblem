@@ -1,25 +1,49 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyzerProblem;
 
-namespace MoodAnalyserTest
+namespace MoodAnalyzerProblem
 {
     [TestClass]
     public class MoodAnalyserTest
     {
-        //UC3
-        //TC 3.2
+        //UC4
+        //TC 4.1  Given MoodAnalyse Class Name Should Return MoodAnalyser Object.
         [TestMethod]
-        public void GivenEmptyMessage_WhenAnalyse_ShouldReturnHappy()
+        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
         {
-            string message = string.Empty;
-            MoodAnalyser moodAnalyzer = new MoodAnalyser(message);
+            string message = null;
+            object expected = new MoodAnalyser(message);
+            object obj = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser");
+            expected.Equals(obj);
+        }
+        //TC 4.2  Given Improper Class Name Should throw MoodAnalyssiException.
+        [TestMethod]
+        public void GivenImproperClassNameShouldThrowMoodAnalysisException()
+        {
+            string expected = "Class Not Found";
             try
             {
-                string actutal = moodAnalyzer.AnalyseMood();
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser");
+
             }
-            catch (MoodAnalyserException ex)
+            catch (MoodAnalyserException exception)
             {
-                Assert.AreEqual(ex.Message, "Message is Empty");
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
+        //TC 4.3  Given Improper Constructor should throw MoodAnalysisException
+        [TestMethod]
+        public void GivenImproperConstructorShouldThrowMoodAnalysisException()
+        {
+
+            string expected = "Constructor is Not Found";
+            try
+            {
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyzerProblem.MoodAnalyser","MoodAnalyser");
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
             }
         }
     }
